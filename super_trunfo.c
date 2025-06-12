@@ -21,7 +21,19 @@ void calcularDensidadePopulacional(struct Carta *carta){
 
 //Função de Cálculo do PIB per Capita
 void calcularPibPerCapita(struct Carta *carta){
-    carta->pibPerCapita = carta->pib / carta->populacao;
+    carta->pibPerCapita = (float) carta->pib / carta->populacao;
+};
+
+void exibirCarta(struct Carta carta){
+    printf("Estado: %c\n", carta.estado);
+    printf("Codigo: %s\n", carta.codigo);
+    printf("Nome da Cidade: %s\n", carta.nomeCidade);
+    printf("Populacao: %d\n", carta.populacao);
+    printf("Area: %.2f km²\n", carta.area);
+    printf("PIB: %.2f bilhões de reais\n", carta.pib);
+    printf("Numero de Pontos Turisticos: %d\n", carta.numPontosTuristicos);
+    printf("Densidade Populacional: %.2f hab/km² \n", carta.densidadePop);
+    printf("PIB per Capita: %.2f reais \n", carta.pibPerCapita);
 };
 
 int main () {
@@ -82,27 +94,11 @@ int main () {
 
     // Exibição dos dados da Carta 1
     printf("\nCarta 1:\n");
-    printf("Estado: %c\n", carta1.estado);
-    printf("Codigo: %s\n", carta1.codigo);
-    printf("Nome da Cidade: %s\n", carta1.nomeCidade);
-    printf("Populacao: %d\n", carta1.populacao);
-    printf("Area: %.2f km²\n", carta1.area);
-    printf("PIB: %.2f bilhões de reais\n", carta1.pib);
-    printf("Numero de Pontos Turisticos: %d\n", carta1.numPontosTuristicos);
-    printf("Densidade Populacional: %.2f hab/km² \n", carta1.densidadePop);
-    printf("PIB per Capita: %.2f reais \n", carta1.pibPerCapita);
+    exibirCarta(carta1);
 
     // Exibição dos dados da Carta 2
     printf("\nCarta 2:\n");
-    printf("Estado: %c\n", carta2.estado);
-    printf("Codigo: %s\n", carta2.codigo);
-    printf("Nome da Cidade: %s\n", carta2.nomeCidade);
-    printf("Populacao: %d\n", carta2.populacao);
-    printf("Area: %.2f \n", carta2.area);
-    printf("PIB: R$ %.2f \n", carta2.pib);
-    printf("Numero de Pontos Turisticos: %d\n", carta2.numPontosTuristicos);
-    printf("Densidade Populacional: %.2f hab/km² \n", carta1.densidadePop);
-    printf("PIB per Capita: %.2f reais \n", carta1.pibPerCapita);
+    exibirCarta(carta2);
 
     return 0;
 };
