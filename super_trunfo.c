@@ -28,12 +28,12 @@ void calcularDensidadePopulacional(Carta *carta){
 void calcularPibPerCapita(Carta *carta){
     carta->pibPerCapita = (float) carta->pib / carta->populacao;
 };
-
+//Função de Cálculo de Super Poder
 void calcularSuperPoder(Carta *carta){
     float inversoDaDensidadePop = carta->densidadePop / 1.0;
     carta->superPoder = (float)carta->populacao + carta->area + carta->pib + carta->numPontosTuristicos + carta->pibPerCapita + inversoDaDensidadePop;
 }
-
+//Função de Cadastro de Carta
 void cadastrarCarta(Carta *carta){
 
     printf("Digite o Estado: ");
@@ -61,7 +61,7 @@ void cadastrarCarta(Carta *carta){
     scanf("%d", &carta->numPontosTuristicos);
     limparBuffer();
 }
-
+//Função para exibir Carta
 void exibirCarta(Carta carta){
     printf("Estado: %c\n", carta.estado);
     printf("Codigo: %s\n", carta.codigo);
@@ -74,7 +74,21 @@ void exibirCarta(Carta carta){
     printf("PIB per Capita: %.2f reais \n", carta.pibPerCapita);
     printf("Super Poder: %.2f\n", carta.superPoder);
 };
+//Função para comparar cartas
+int compararAtributos(float carta1, float carta2){
+    return carta1 > carta2 ? 1 : 2;
 
+}
+void compararCartas(Carta carta1, Carta carta2){
+    printf("\nComparação de Cartas:\n");
+    printf("População: Carta %d venceu\n", compararAtributos(carta1.populacao, carta2.populacao));
+    printf("Área: Carta %d venceu\n", compararAtributos(carta1.area, carta2.area));
+    printf("PIB: Carta %d venceu\n", compararAtributos(carta1.pib, carta2.pib));
+    printf("Pontos Turísticos: Carta %d venceu\n", compararAtributos(carta1.numPontosTuristicos, carta2.numPontosTuristicos)); 
+    printf("Densidade Populacional: Carta %d venceu\n", (compararAtributos(carta1.densidadePop, carta2.densidadePop) == 1 ? 2 : 1));
+    printf("PIB per Capita: Carta %d venceu\n", compararAtributos(carta1.pibPerCapita, carta2.pibPerCapita));
+    printf("Super Poder: Carta %d venceu\n", compararAtributos(carta1.superPoder, carta2.superPoder));
+}
 int main () {
     //Inicialização das variáveis das Cartas
     Carta carta1, carta2;
@@ -102,6 +116,8 @@ int main () {
     // Exibição dos dados da Carta 2
     printf("\nCarta 2:\n");
     exibirCarta(carta2);
+
+    compararCartas(carta1, carta2);
 
     return 0;
 };
