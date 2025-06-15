@@ -29,7 +29,13 @@ void calcularPibPerCapita(struct Carta *carta){
     carta->pibPerCapita = (float) carta->pib / carta->populacao;
 };
 
+void calcularSuperPoder(struct Carta *carta){
+    float inversoDaDensidadePop = carta->densidadePop / 1.0;
+    carta->superPoder = (float)carta->populacao + carta->area + carta->pib + carta->numPontosTuristicos + carta->pibPerCapita + inversoDaDensidadePop;
+}
+
 void cadastrarCarta(struct Carta *carta){
+
     printf("Digite o Estado: ");
     scanf("%c", &carta->estado);
     limparBuffer();
@@ -53,6 +59,7 @@ void cadastrarCarta(struct Carta *carta){
 
     printf("Digite o numero de pontos turisticos: ");
     scanf("%d", &carta->numPontosTuristicos);
+    limparBuffer();
 }
 
 void exibirCarta(struct Carta carta){
@@ -65,6 +72,7 @@ void exibirCarta(struct Carta carta){
     printf("Numero de Pontos Turisticos: %d\n", carta.numPontosTuristicos);
     printf("Densidade Populacional: %.2f hab/km² \n", carta.densidadePop);
     printf("PIB per Capita: %.2f reais \n", carta.pibPerCapita);
+    printf("Super Poder: %.2f\n", carta.superPoder);
 };
 
 int main () {
@@ -84,6 +92,8 @@ int main () {
     calcularDensidadePopulacional(&carta2);
     calcularPibPerCapita(&carta1);
     calcularPibPerCapita(&carta2);
+    calcularSuperPoder(&carta1);
+    calcularSuperPoder(&carta2);
 
     // Exibição dos dados da Carta 1
     printf("\nCarta 1:\n");
