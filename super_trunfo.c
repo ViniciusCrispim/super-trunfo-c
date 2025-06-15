@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // Definição da estrutura da carta
-struct Carta
+typedef struct
 {
     char estado;
     char codigo[4];
@@ -13,28 +13,28 @@ struct Carta
     float densidadePop;
     float pibPerCapita;
     float superPoder;
-};
+} Carta;
 
 void limparBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 //Função de Cálculo de Densidade Populacional
-void calcularDensidadePopulacional(struct Carta *carta){
+void calcularDensidadePopulacional(Carta *carta){
     carta->densidadePop = carta->populacao / carta->area;
 };
 
 //Função de Cálculo do PIB per Capita
-void calcularPibPerCapita(struct Carta *carta){
+void calcularPibPerCapita(Carta *carta){
     carta->pibPerCapita = (float) carta->pib / carta->populacao;
 };
 
-void calcularSuperPoder(struct Carta *carta){
+void calcularSuperPoder(Carta *carta){
     float inversoDaDensidadePop = carta->densidadePop / 1.0;
     carta->superPoder = (float)carta->populacao + carta->area + carta->pib + carta->numPontosTuristicos + carta->pibPerCapita + inversoDaDensidadePop;
 }
 
-void cadastrarCarta(struct Carta *carta){
+void cadastrarCarta(Carta *carta){
 
     printf("Digite o Estado: ");
     scanf("%c", &carta->estado);
@@ -62,7 +62,7 @@ void cadastrarCarta(struct Carta *carta){
     limparBuffer();
 }
 
-void exibirCarta(struct Carta carta){
+void exibirCarta(Carta carta){
     printf("Estado: %c\n", carta.estado);
     printf("Codigo: %s\n", carta.codigo);
     printf("Nome da Cidade: %s\n", carta.nomeCidade);
@@ -77,7 +77,7 @@ void exibirCarta(struct Carta carta){
 
 int main () {
     //Inicialização das variáveis das Cartas
-    struct Carta carta1, carta2;
+    Carta carta1, carta2;
 
     // Leitura dos dados da Carta 1
     printf("Digite os dados da Carta 1\n");
