@@ -3,7 +3,7 @@
 // Definição da estrutura da carta
 typedef struct
 {
-    char estado;
+    char estado[2];
     char codigo[4];
     char nomeCidade[100];
     unsigned long int populacao;
@@ -23,7 +23,6 @@ void limparBuffer() {
 void calcularDensidadePopulacional(Carta *carta){
     carta->densidadePop = carta->populacao / carta->area;
 };
-
 //Função de Cálculo do PIB per Capita
 void calcularPibPerCapita(Carta *carta){
     carta->pibPerCapita = (float) carta->pib / carta->populacao;
@@ -37,7 +36,7 @@ void calcularSuperPoder(Carta *carta){
 void cadastrarCarta(Carta *carta){
 
     printf("Digite o Estado: ");
-    scanf("%c", &carta->estado);
+    scanf("%s", carta->estado);
     limparBuffer();
 
     printf("Digite o codigo da Carta 1: ");
@@ -63,7 +62,7 @@ void cadastrarCarta(Carta *carta){
 }
 //Função para exibir Carta
 void exibirCarta(Carta carta){
-    printf("Estado: %c\n", carta.estado);
+    printf("Estado: %s\n", carta.estado);
     printf("Codigo: %s\n", carta.codigo);
     printf("Nome da Cidade: %s\n", carta.nomeCidade);
     printf("Populacao: %d\n", carta.populacao);
@@ -79,6 +78,22 @@ int compararAtributos(float carta1, float carta2){
     return carta1 > carta2 ? 1 : 2;
 
 }
+
+void compararAtributoCartas(Carta carta1, Carta carta2) {
+    printf("\nComparação de cartas (Atributo: População):\n\n");
+
+    printf("Carta 1 - %s (%s): %d\n", carta1.nomeCidade, carta1.estado, carta1.populacao);
+    printf("Carta 2 - %s (%s): %d\n", carta2.nomeCidade, carta2.estado, carta2.populacao);
+
+    if (carta1.populacao > carta2.populacao) {
+        printf("Resultado: Carta 1 (%s) venceu!\n", carta1.nomeCidade);
+    } else if (carta2.populacao > carta1.populacao) {
+        printf("Resultado: Carta 2 (%s) venceu!\n", carta2.nomeCidade);
+    } else {
+        printf("Resultado: Empate!\n");
+    }
+}
+
 void compararCartas(Carta carta1, Carta carta2){
     printf("\nComparação de Cartas:\n");
     printf("População: Carta %d venceu\n", compararAtributos(carta1.populacao, carta2.populacao));
@@ -90,16 +105,19 @@ void compararCartas(Carta carta1, Carta carta2){
     printf("Super Poder: Carta %d venceu\n", compararAtributos(carta1.superPoder, carta2.superPoder));
 }
 int main () {
-    //Inicialização das variáveis das Cartas
-    Carta carta1, carta2;
+    
+    //Inicialização automática: 
+    Carta carta1 = {"A", "A01", "São Paulo", 12300000, 1521.0, 230.0, 20};
+    Carta carta2 = {"B", "B01", "Rio de Janeiro", 6000000, 1200.0, 190.0, 15};
 
+    //Inicialização das variáveis das Cartas de forma dinâmica
+    // Carta carta1, carta2;
     // Leitura dos dados da Carta 1
-    printf("Digite os dados da Carta 1\n");
-    cadastrarCarta(&carta1);
-   
+    // printf("Digite os dados da Carta 1\n");
+    // cadastrarCarta(&carta1);
     //Leitura dos dados da Carta 2
-    printf("\nDigite os dados da Carta 2\n");
-    cadastrarCarta(&carta2);
+    // printf("\nDigite os dados da Carta 2\n");
+    // cadastrarCarta(&carta2);
 
     //Calculando a Densidade Populacional e PIB per Capita
     calcularDensidadePopulacional(&carta1);
@@ -117,7 +135,8 @@ int main () {
     printf("\nCarta 2:\n");
     exibirCarta(carta2);
 
-    compararCartas(carta1, carta2);
+    // compararCartas(carta1, carta2);
+    compararAtributoCartas(carta1, carta2);
 
     return 0;
 };
