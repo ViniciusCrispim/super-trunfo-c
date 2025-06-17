@@ -19,19 +19,21 @@ void limparBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
-//Função de Cálculo de Densidade Populacional
-void calcularDensidadePopulacional(Carta *carta){
+
+//Função para cálculo de atributos
+void calcularAtributos(Carta *carta){
     carta->densidadePop = carta->populacao / carta->area;
-};
-//Função de Cálculo do PIB per Capita
-void calcularPibPerCapita(Carta *carta){
+
     carta->pibPerCapita = (float) carta->pib / carta->populacao;
-};
-//Função de Cálculo de Super Poder
-void calcularSuperPoder(Carta *carta){
+
     float inversoDaDensidadePop = carta->densidadePop / 1.0;
-    carta->superPoder = (float)carta->populacao + carta->area + carta->pib + carta->numPontosTuristicos + carta->pibPerCapita + inversoDaDensidadePop;
-}
+    carta->superPoder = (float)carta->populacao + 
+                                carta->area + 
+                                carta->pib + 
+                                carta->numPontosTuristicos + 
+                                carta->pibPerCapita + 
+                                inversoDaDensidadePop;
+};
 //Função de Cadastro de Carta
 void cadastrarCarta(Carta *carta){
 
@@ -104,6 +106,7 @@ void compararCartas(Carta carta1, Carta carta2){
     printf("PIB per Capita: Carta %d venceu\n", compararAtributos(carta1.pibPerCapita, carta2.pibPerCapita));
     printf("Super Poder: Carta %d venceu\n", compararAtributos(carta1.superPoder, carta2.superPoder));
 }
+
 int main () {
     
     //Inicialização automática: 
@@ -119,13 +122,9 @@ int main () {
     // printf("\nDigite os dados da Carta 2\n");
     // cadastrarCarta(&carta2);
 
-    //Calculando a Densidade Populacional e PIB per Capita
-    calcularDensidadePopulacional(&carta1);
-    calcularDensidadePopulacional(&carta2);
-    calcularPibPerCapita(&carta1);
-    calcularPibPerCapita(&carta2);
-    calcularSuperPoder(&carta1);
-    calcularSuperPoder(&carta2);
+    //Calculando os Atributos: Densidade Populacional e PIB per Capita e Super Poder
+    calcularAtributos(&carta1);
+    calcularAtributos(&carta2);
 
     // Exibição dos dados da Carta 1
     printf("\nCarta 1:\n");
